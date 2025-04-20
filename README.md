@@ -1,8 +1,8 @@
 ---
 title: Imageprocessor
-emoji: 👀
-colorFrom: gray
-colorTo: yellow
+emoji: 🏃
+colorFrom: indigo
+colorTo: purple
 sdk: gradio
 sdk_version: 5.25.2
 app_file: app.py

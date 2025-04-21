@@ -175,42 +175,45 @@ def teardown_module(module):
             os.remove(file)
 
 
-def test_gaussian_blur(self):
+def test_gaussian_blur(valid_image_path):
     """Test Gaussian blur filter"""
+    processor = ImageProcessor(valid_image_path)
     # Test with default kernel size
-    blurred = self.processor.gaussian_blur()
-    self.assertEqual(blurred.shape, self.processor.image.shape)
+    blurred = processor.gaussian_blur()
+    assert blurred.shape == processor.image.shape
     
     # Test with custom kernel size
-    blurred = self.processor.gaussian_blur(7)
-    self.assertEqual(blurred.shape, self.processor.image.shape)
+    blurred = processor.gaussian_blur(7)
+    assert blurred.shape == processor.image.shape
     
     # Test invalid kernel size
-    with self.assertRaises(ValueError):
-        self.processor.gaussian_blur(4)  # Even number
-    with self.assertRaises(ValueError):
-        self.processor.gaussian_blur(0)  # Zero
-    with self.assertRaises(ValueError):
-        self.processor.gaussian_blur(-1)  # Negative
+    with pytest.raises(ValueError):
+        processor.gaussian_blur(4)  # Even number
+    with pytest.raises(ValueError):
+        processor.gaussian_blur(0)  # Zero
+    with pytest.raises(ValueError):
+        processor.gaussian_blur(-1)  # Negative
 
 
-def test_cartoonize(self):
+def test_cartoonize(valid_image_path, grayscale_image_path):
     """Test cartoonize filter"""
-    cartoon = self.processor.cartoonize()
-    self.assertEqual(cartoon.shape, self.processor.image.shape)
+    processor = ImageProcessor(valid_image_path)
+    cartoon = processor.cartoonize()
+    assert cartoon.shape == processor.image.shape
     
     # Test with grayscale image
-    gray_processor = ImageProcessor(self.gray_image_path)
+    gray_processor = ImageProcessor(grayscale_image_path)
     cartoon = gray_processor.cartoonize()
-    self.assertEqual(cartoon.shape, gray_processor.image.shape)
+    assert cartoon.shape == gray_processor.image.shape
 
 
-def test_sepia(self):
+def test_sepia(valid_image_path, grayscale_image_path):
     """Test sepia filter"""
-    sepia = self.processor.sepia()
-    self.assertEqual(sepia.shape, self.processor.image.shape)
+    processor = ImageProcessor(valid_image_path)
+    sepia = processor.sepia()
+    assert sepia.shape == processor.image.shape
     
     # Test with grayscale image
-    gray_processor = ImageProcessor(self.gray_image_path)
+    gray_processor = ImageProcessor(grayscale_image_path)
     sepia = gray_processor.sepia()
-    self.assertEqual(sepia.shape, gray_processor.image.shape)
+    assert sepia.shape == gray_processor.image.shape

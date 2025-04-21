@@ -11,3 +11,4 @@ short_description: Image processor with different filters
 ---
 
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+The App is presented on the Huggingface Space at https://huggingface.co/spaces/Alan42Yy/Imageprocessor
